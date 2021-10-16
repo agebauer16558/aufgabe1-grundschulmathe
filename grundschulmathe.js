@@ -1,7 +1,7 @@
 alert ("Grundschulmathe")
 
 var maxRepeat = [0, 1, 2, 3, 4]
-var points = 0 
+var points = 0
 const maxPoints = 5
 const pointsRequiredNextLevel = 4
 
@@ -50,16 +50,30 @@ if (points >= pointsRequiredNextLevel)
 
 
 
-
+// Calculate operations
 function calculate (operator) 
 { 
     var a = Math.floor(Math.random()*21)
     var b = Math.floor(Math.random()*21)
-    if ( operator === "-") b = Math.min(b, a)
-    if ( operator === "/" && a % b !== 0) b = a
+    
+    if ( operator === "-") 
+    {
+        b = Math.min(b, a)
+    }
+    while ( operator === "/" && a % b !== 0)  
+    {
+        b = Math.floor(Math.random()*21)
+    }
+    if ( a < b || a === 0) 
+    {
+       a = b 
+    }
+        
+        var result = prompt (`How much is ${a} ${operator} ${b}?`)
+    
 
-    var result = prompt (`Wie viel ist ${a} ${operator} ${b}?`)
 
+    // Chooses the operator for the calculation
     function operatorChooser (a, b, operator) 
     {
         if (operator === "+") 
@@ -83,11 +97,11 @@ function calculate (operator)
     if (parseInt(result, 10) === operatorChooser(a, b, operator)) 
     {
         points++ 
-        alert (`Richtig! ${points} / ${maxPoints}`)
+        alert (`Right! ${points} / ${maxPoints}`)
     }
     else 
     {
-        alert (`Falsch! ${points} / ${maxPoints}`)   
+        alert (`Wrong! ${points} / ${maxPoints}`)   
     }
 
 }
